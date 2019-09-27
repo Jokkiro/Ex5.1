@@ -1,4 +1,5 @@
 #include <iostream>
+#include <cstdlib>
 
 enum class GameState {
 	INIT,
@@ -8,7 +9,18 @@ enum class GameState {
 };
 
 void GenerateMysteryNumber(int& mystery) {
-	
+	mystery = rand();
+}
+
+void FindMystery() {
+	int userChoice;
+	std::cout << "Enter an integer between 0 and 100\n";
+	std::cin >> userChoice;
+}
+
+void turnNumber() {
+	int turn;
+
 }
 
 int main() {
@@ -20,32 +32,29 @@ int main() {
 	{
 		switch (gameState) {
 		case GameState::INIT:
-			/*
-				Cette partie doit donner une valeur à mysterNumber comprise entre 0 et 100
-			*/
+			mysteryNumber = (rand() % 100) + 1;
 			gameState = GameState::PLAY;
 			break;
 
 		case GameState::PLAY:
-			/*
-				Cette partie doit:
-				- essayer de deviner le nombre mystère à l'aide d'un function
-				- Si le nombre mystre est trouvé il faut passer à l'état END
-			*/
+			FindMystery();
+			if (userChoice == mysteryNumber) {
+				GameState::END;
+			}
 			break;
 
 		case GameState::END:
-			/*
-				Cette partie doit afficher le nombre de coups qui ont été nécessaire pour trouver le nombre mystère et indiquer quel est ce nombre mystère
-			*/
+			turnNumber();
+			turn = userChoice;
+			std::cout << "Number of turn : " << turn << "\n";
+			std::cout << "Mystery number was : " << mysteryNumber << "\n";
 			break;
 
 		case GameState::EXIT:
 			break;
 		}
 	}
-
 	
-	system("pose");
-	return EXIT_FAILURE;
+	system("pause");
+	return EXIT_SUCCESS;
 }
